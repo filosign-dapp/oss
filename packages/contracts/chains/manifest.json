@@ -1,0 +1,20 @@
+{
+	"8453": {
+		"name": "Base",
+		"explorerTxUrl": "https://basescan.org/tx/",
+		"defaultRpcUrl": "https://mainnet.base.org"
+	},
+	"84532": {
+		"name": "Base Sepolia",
+		"registryAddress": "0x80F67a3D32b4F4cCe23e4A31Fc820F0C59Ee061B",
+		"paymentValidatorAddress": "0xB43E2DE02Ce7081C2b4fd54804F55d31223d0A1c",
+		"attachmentReleaseAddress": "0x2b78Ec5BBd833886A05395aB0ca8339BB9084C1d",
+		"explorerTxUrl": "https://sepolia.basescan.org/tx/",
+		"defaultRpcUrl": "https://sepolia.base.org"
+	},
+	"31337": {
+		"name": "Hardhat",
+		"explorerTxUrl": "",
+		"defaultRpcUrl": "http://127.0.0.1:8545"
+	}
+}

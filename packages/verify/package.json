@@ -1,0 +1,29 @@
+{
+	"name": "@filosign/verify",
+	"version": "0.1.0",
+	"description": "Independent Filosign proof packet verification engine",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"default": "./src/index.ts"
+		}
+	},
+	"scripts": {
+		"test": "bun test tests/",
+		"check": "biome check .",
+		"check-types": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.tests.json",
+		"build": "tsc --noEmit -p tsconfig.json"
+	},
+	"dependencies": {
+		"@filosign/contracts": "workspace:*",
+		"@filosign/protocol": "workspace:*",
+		"fflate": "catalog:",
+		"viem": "catalog:"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "catalog:",
+		"@types/bun": "catalog:",
+		"typescript": "catalog:"
+	}
+}

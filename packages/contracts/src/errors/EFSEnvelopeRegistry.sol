@@ -1,0 +1,41 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+pragma solidity ^0.8.26;
+
+import "./EFSCommon.sol";
+
+error OnlyServer();
+error SignatureExpired();
+error SignatureFuture();
+error SenderNotRegistered();
+error BadSignersLength();
+error DuplicateSigner(address signer);
+error ZeroSigner();
+error UnsortedSigners();
+error FileAlreadyRegistered();
+error FileNotRegistered();
+error InvalidSigner();
+error InvalidSender();
+error AlreadySigned();
+error InvalidSignature();
+error InvalidSignersCommitment();
+error ServerUnchanged();
+error ExceedsMaxSigners();
+error ExceedsMaxViewers();
+error DuplicateCommitment();
+error InvalidRoutingConfig();
+error InvalidQuorumConfig();
+error SequentialOrderViolation();
+error EnvelopeRecalled();
+error EnvelopeAlreadyComplete();
+error OptionalSignersNotSupported();
+error UnauthorizedRecaller();
+error ExceedsMaxOrgControllers();
+error ZeroOrgIdCommitment();
+error DuplicateOrgController(address wallet);
+error SignerReplacementPending();
+error NoSignerReplacementPending();
+error ZeroDocumentSha256();
+error SignerNotBound();
+error SignerWalletMismatch();
+error SatelliteAlreadyConfigured();
+error PaymentLegsAlreadyPaid();

@@ -1,0 +1,773 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "envelopeRegistry_",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "deploymentChainId_",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "EnvelopeRecalled",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExceedsMaxCommitments",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExceedsMaxLegs",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExceedsMaxRulesPerCid",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "FileNotRegistered",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InsufficientAllowance",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InsufficientTransferReceived",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidAmount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidLegIndex",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidPayer",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidReleaseConfig",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "LegAlreadyPaid",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "PayerCannotBeRecipient",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "RecipientCannotBeToken",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "RecipientCannotBeValidator",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ReentrancyGuardReentrantCall",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "RequiredSigningStarted",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "RuleAlreadyCancelled",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "RuleAlreadyExecuted",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "RuleNotExecutable",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			}
+		],
+		"name": "SafeERC20FailedOperation",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "UnauthorizedRegistry",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "UnauthorizedRuleRegistration",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "PaymentRuleCancelled",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "payer",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "enum FSPaymentValidator.ReleaseType",
+				"name": "releaseType",
+				"type": "uint8"
+			}
+		],
+		"name": "PaymentRuleRegistered",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "PaymentRuleUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "PayoutExecuted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "legIndex",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "PayoutLegExecuted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "oldCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "newCommitment",
+				"type": "bytes32"
+			}
+		],
+		"name": "SignerCommitmentRemapped",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "canExecute",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "cancelPayoutRule",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "deploymentChainId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "envelopeRegistry",
+		"outputs": [
+			{
+				"internalType": "contract IFSEnvelopeRegistry",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "executePayout",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "legIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "executePayoutLeg",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId_",
+				"type": "bytes32"
+			}
+		],
+		"name": "hasAnyPaidLegForCid",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "legIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "isLegPaid",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "legPaidBitmap",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nextRuleId",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "payer_",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "token_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "cidId_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "enum FSPaymentValidator.ReleaseType",
+				"name": "releaseType_",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "specificSignerCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint8",
+				"name": "thresholdN_",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint64",
+				"name": "expiresAt_",
+				"type": "uint64"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "signerCommitments_",
+				"type": "bytes32[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct FSPaymentValidator.PayoutLeg[]",
+				"name": "legs_",
+				"type": "tuple[]"
+			}
+		],
+		"name": "registerRule",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "oldCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "newCommitment_",
+				"type": "bytes32"
+			}
+		],
+		"name": "remapSignerCommitment",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId_",
+				"type": "bytes32"
+			}
+		],
+		"name": "ruleIdsForCid",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "ruleLegs",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct FSPaymentValidator.PayoutLeg[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "rules",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "payer",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "enum FSPaymentValidator.ReleaseType",
+				"name": "releaseType",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "specificSignerCommitment",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint8",
+				"name": "thresholdN",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint64",
+				"name": "expiresAt",
+				"type": "uint64"
+			},
+			{
+				"internalType": "bool",
+				"name": "executed",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "cancelled",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "signerCommitments",
+		"outputs": [
+			{
+				"internalType": "bytes32[]",
+				"name": "",
+				"type": "bytes32[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			}
+		],
+		"name": "unpaidLegCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "count",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "ruleId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum FSPaymentValidator.ReleaseType",
+				"name": "releaseType_",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "specificSignerCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint8",
+				"name": "thresholdN_",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint64",
+				"name": "expiresAt_",
+				"type": "uint64"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "signerCommitments_",
+				"type": "bytes32[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct FSPaymentValidator.PayoutLeg[]",
+				"name": "legs_",
+				"type": "tuple[]"
+			}
+		],
+		"name": "updatePayoutRule",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]

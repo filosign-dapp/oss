@@ -1,0 +1,174 @@
+/* Filosign palette — aligned with apps/client/src/globals.css */
+:root {
+	color-scheme: light;
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.141 0.005 285.823);
+	--card: oklch(0.99 0.001 286);
+	--card-foreground: oklch(0.141 0.005 285.823);
+	--border: oklch(0.92 0.004 286.32);
+	--muted: oklch(0.967 0.001 286.375);
+	--muted-foreground: oklch(0.552 0.016 285.938);
+	--primary: oklch(0.21 0.006 285.885);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(94% 0.097 130);
+	--secondary-foreground: oklch(0.21 0.006 285.885);
+	--destructive: hsl(0, 84%, 58%);
+	--destructive-foreground: hsl(0, 0%, 100%);
+	--warning: oklch(0.8426 0.1688 83.88);
+	--warning-foreground: oklch(0.26 0.07 82);
+	--ring: hsl(90, 56%, 71%);
+	--radius: 0.6rem;
+}
+
+.dark {
+	color-scheme: dark;
+	--background: oklch(0.145 0 0);
+	--foreground: oklch(0.985 0 0);
+	--card: oklch(0.205 0 0);
+	--card-foreground: oklch(0.985 0 0);
+	--border: oklch(1 0 0 / 10%);
+	--muted: oklch(0.269 0 0);
+	--muted-foreground: oklch(0.708 0 0);
+	--primary: oklch(94% 0.097 130);
+	--primary-foreground: oklch(0.21 0.006 285.885);
+	--secondary: oklch(94% 0.097 130);
+	--secondary-foreground: oklch(0.21 0.006 285.885);
+	--destructive: oklch(0.704 0.191 22.216);
+	--destructive-foreground: oklch(0.985 0 0);
+	--warning: oklch(0.91 0.12 83.88);
+	--warning-foreground: oklch(0.26 0.07 82);
+	--ring: oklch(0.556 0 0);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: "Inter", system-ui, -apple-system, sans-serif;
+	line-height: 1.5;
+	background: var(--background);
+	color: var(--foreground);
+}
+
+.page {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 3rem 1.25rem 4rem;
+}
+
+.page-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.brand-lockup {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 0.5rem;
+}
+
+.brand-logo-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.375rem;
+	border-radius: 0.25rem;
+	background: var(--secondary);
+}
+
+.brand-logo {
+	display: block;
+	width: 2rem;
+	height: 2rem;
+}
+
+.brand-name {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+}
+
+.hero h1 {
+	margin: 0.25rem 0 0.75rem;
+	font-size: clamp(2rem, 4vw, 2.75rem);
+	font-weight: 500;
+	letter-spacing: -0.02em;
+}
+
+.lede,
+.footnote,
+.section-intro {
+	color: var(--muted-foreground);
+}
+
+.theme-toggle {
+	flex-shrink: 0;
+	padding: 0.45rem 0.75rem;
+	border-radius: 999px;
+	border: 1px solid var(--border);
+	background: var(--card);
+	color: var(--foreground);
+	font: inherit;
+	font-size: 0.85rem;
+	cursor: pointer;
+}
+
+.theme-toggle:hover {
+	border-color: var(--secondary);
+}
+
+.dropzone {
+	margin-top: 2rem;
+	padding: 2.5rem 1.5rem;
+	border: 2px dashed var(--border);
+	border-radius: calc(var(--radius) * 1.4);
+	background: var(--card);
+	text-align: center;
+}
+
+.dropzone-active {
+	border-color: var(--secondary);
+	background: var(--secondary);
+	color: var(--secondary-foreground);
+}
+
+.dropzone-active .file-button {
+	background: var(--background);
+	color: var(--secondary-foreground);
+}
+
+.file-button {
+	display: inline-block;
+	margin-top: 1rem;
+	padding: 0.65rem 1rem;
+	border-radius: 999px;
+	background: var(--secondary);
+	color: var(--secondary-foreground);
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.file-button:hover {
+	filter: brightness(1.05);
+}
+
+.banner {
+	margin-top: 1.5rem;
+	padding: 1rem 1.25rem;
+	border-radius: var(--radius);
+	border: 1px solid var(--border);
+	background: var(--card);
+}
+
+.banner-fail {
+	border-color: var(--destructive);
+	background: var(--card);
+	color: var(--foreground);
+}

@@ -1,0 +1,42 @@
+{
+	"name": "filosign-oss",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Open-source Filosign protocol, contracts, and independent proof verification",
+	"workspaces": ["packages/*", "apps/*"],
+	"scripts": {
+		"test": "bun run --filter '@filosign/*' test && bun run --filter verify-web test",
+		"check": "bun run --filter '@filosign/*' check && bun run --filter verify-web check",
+		"check-types": "bun run --filter '@filosign/*' check-types && bun run --filter verify-web check-types",
+		"build": "bun run --filter '@filosign/verify' build && bun run --filter verify-web build",
+		"contracts:test": "bun run --cwd packages/contracts test",
+		"contracts:export-abi": "bun run --cwd packages/contracts export-abi"
+	},
+	"engines": {
+		"bun": ">=1.3.14",
+		"node": ">=25"
+	},
+	"packageManager": "bun@1.3.14",
+	"catalog": {
+		"typescript": "6.0.3",
+		"@types/bun": "1.3.13",
+		"@types/node": "25.9.1",
+		"@types/react": "^19.1.16",
+		"@types/react-dom": "^19.1.9",
+		"viem": "2.48.11",
+		"zod": "4.4.3",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"vite": "8.0.11",
+		"@vitejs/plugin-react": "6.0.1",
+		"fflate": "0.8.2",
+		"fast-json-stable-stringify": "2.1.0",
+		"@biomejs/biome": "2.4.14"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "catalog:",
+		"@types/bun": "catalog:",
+		"@types/node": "catalog:",
+		"typescript": "catalog:"
+	}
+}

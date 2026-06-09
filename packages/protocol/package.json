@@ -1,0 +1,27 @@
+{
+	"name": "@filosign/protocol",
+	"version": "0.1.0",
+	"description": "Filosign wire schemas and verification commitment math",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"default": "./src/index.ts"
+		}
+	},
+	"scripts": {
+		"test": "bun test tests/",
+		"check": "biome check .",
+		"check-types": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.tests.json"
+	},
+	"dependencies": {
+		"fast-json-stable-stringify": "catalog:",
+		"viem": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "catalog:",
+		"@types/bun": "catalog:",
+		"typescript": "catalog:"
+	}
+}

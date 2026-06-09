@@ -1,0 +1,1765 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "server_",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "AlreadySigned",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "BadSignersLength",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "DuplicateCommitment",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			}
+		],
+		"name": "DuplicateOrgController",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "EnvelopeAlreadyComplete",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "EnvelopeRecalled",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExceedsMaxOrgControllers",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExceedsMaxSigners",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ExceedsMaxViewers",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "FileAlreadyRegistered",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "FileNotRegistered",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidQuorumConfig",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidRoutingConfig",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSender",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidShortString",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSignature",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSigner",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidSignersCommitment",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NoSignerReplacementPending",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "OnlyServer",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "OptionalSignersNotSupported",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "OwnableInvalidOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "OwnableUnauthorizedAccount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "PaymentLegsAlreadyPaid",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "SatelliteAlreadyConfigured",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "SequentialOrderViolation",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ServerUnchanged",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "SignatureExpired",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "SignatureFuture",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "SignerReplacementPending",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "SignerWalletMismatch",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "str",
+				"type": "string"
+			}
+		],
+		"name": "StringTooLong",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "UnauthorizedRecaller",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "UnsortedSigners",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ZeroAddress",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ZeroDocumentSha256",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ZeroOrgIdCommitment",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ZeroSigner",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [],
+		"name": "EIP712DomainChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint48",
+				"name": "completedAt",
+				"type": "uint48"
+			}
+		],
+		"name": "EnvelopeCompleted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint48",
+				"name": "timestamp",
+				"type": "uint48"
+			}
+		],
+		"name": "EnvelopeRegistered",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "revokedBy",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint48",
+				"name": "revokedAt",
+				"type": "uint48"
+			}
+		],
+		"name": "EnvelopeRevokedBeforeComplete",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recaller",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint8",
+				"name": "signaturesClearedCount",
+				"type": "uint8"
+			}
+		],
+		"name": "EnvelopeSignaturesCleared",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "signerWallet",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint48",
+				"name": "timestamp",
+				"type": "uint48"
+			}
+		],
+		"name": "EnvelopeSigned",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "orgIdCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "wallets",
+				"type": "address[]"
+			}
+		],
+		"name": "OrgControllersSet",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferStarted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "paymentValidator",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "attachmentRelease",
+				"type": "address"
+			}
+		],
+		"name": "SatelliteContractsConfigured",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousServer",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newServer",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "changedBy",
+				"type": "address"
+			}
+		],
+		"name": "ServerUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recaller",
+				"type": "address"
+			}
+		],
+		"name": "SignerReplacementCancelled",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recaller",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "oldCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "newCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint8",
+				"name": "signaturesClearedCount",
+				"type": "uint8"
+			}
+		],
+		"name": "SignerReplacementExecuted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "recaller",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "oldCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "newCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes20",
+				"name": "signersCommitmentAfter",
+				"type": "bytes20"
+			}
+		],
+		"name": "SignerReplacementProposed",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "cidIdentifier",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "emailCommitment",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "wallet",
+				"type": "address"
+			}
+		],
+		"name": "SignerWalletBound",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "acceptOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "attachmentRelease",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "emailCommitment_",
+				"type": "bytes32"
+			}
+		],
+		"name": "boundSignerWallet",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "recaller_",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			}
+		],
+		"name": "cancelSignerReplacement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			}
+		],
+		"name": "cidIdentifier",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "recaller_",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			}
+		],
+		"name": "clearEnvelopeSignatures",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32[]",
+				"name": "commitments_",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "computeEmailSignerCommitment",
+		"outputs": [
+			{
+				"internalType": "bytes20",
+				"name": "",
+				"type": "bytes20"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "eip712Domain",
+		"outputs": [
+			{
+				"internalType": "bytes1",
+				"name": "fields",
+				"type": "bytes1"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "version",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "chainId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "verifyingContract",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "salt",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "extensions",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "envelopeRegistrations",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "cidIdentifier",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes20",
+						"name": "signersCommitment",
+						"type": "bytes20"
+					},
+					{
+						"internalType": "bytes20",
+						"name": "viewersCommitment",
+						"type": "bytes20"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "placementCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "documentSha256",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "senderEmailCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "senderAuthSubjectCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "requiredSignersCount",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "requiredSignaturesCount",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "signaturesCount",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "quorumN",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "routingMode",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "routingOrderHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "quorumSetHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "orgIdCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint48",
+						"name": "completedAt",
+						"type": "uint48"
+					},
+					{
+						"internalType": "uint48",
+						"name": "revokedBeforeCompletedAt",
+						"type": "uint48"
+					},
+					{
+						"internalType": "address",
+						"name": "revokedBy",
+						"type": "address"
+					}
+				],
+				"internalType": "struct FSEnvelopeRegistry.EnvelopeRegistrationView",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "recaller_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "routingOrderAfter_",
+				"type": "bytes32[]"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "quorumSetAfter_",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "executeSignerReplacement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orgIdCommitment_",
+				"type": "bytes32"
+			}
+		],
+		"name": "getOrgControllers",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "getPendingSignerReplacement",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "oldCommitment",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "newCommitment",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "recaller",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "routingOrderHashAfter",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "quorumSetHashAfter",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes20",
+				"name": "signersCommitmentAfter",
+				"type": "bytes20"
+			},
+			{
+				"internalType": "uint48",
+				"name": "proposedAt",
+				"type": "uint48"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "signerEmailCommitment_",
+				"type": "bytes32"
+			}
+		],
+		"name": "hasSigned",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32[]",
+				"name": "commitments_",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "hashCommitments",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "isEnvelopeComplete",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orgIdCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "wallet_",
+				"type": "address"
+			}
+		],
+		"name": "isOrgController",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "isRevokedBeforeComplete",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "signerEmailCommitment_",
+				"type": "bytes32"
+			}
+		],
+		"name": "isSigner",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "paymentValidator",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pendingOwner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "recaller_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "oldCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "newCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "routingOrderBefore_",
+				"type": "bytes32[]"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "routingOrderAfter_",
+				"type": "bytes32[]"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "quorumSetBefore_",
+				"type": "bytes32[]"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "quorumSetAfter_",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "proposeSignerReplacement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "recaller_",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			}
+		],
+		"name": "recallEnvelope",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "pieceCid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "requiredCommitments",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "optionalCommitments",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "viewerEmailCommitments",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "senderEmailCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "senderAuthSubjectCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "orgIdCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "routingMode",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "routingOrder",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "uint8",
+						"name": "quorumN",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "quorumSet",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "signature",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "placementCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "documentSha256",
+						"type": "bytes32"
+					}
+				],
+				"internalType": "struct FSEnvelopeRegistry.RegisterEnvelopeInput",
+				"name": "input",
+				"type": "tuple"
+			}
+		],
+		"name": "registerEnvelope",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "sender_",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "viewerWallet_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "viewerEmailCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "authSubjectCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			}
+		],
+		"name": "registerEnvelopeAck",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "sender_",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "signerWallet_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "signerEmailCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "authSubjectCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes20",
+				"name": "dl3SignatureCommitment_",
+				"type": "bytes20"
+			},
+			{
+				"internalType": "uint256",
+				"name": "bindTimestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "bindSignature_",
+				"type": "bytes"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "completionsRoot_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint8",
+				"name": "leafSchemaVersion_",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "routingOrder_",
+				"type": "bytes32[]"
+			},
+			{
+				"internalType": "bytes32[]",
+				"name": "quorumSet_",
+				"type": "bytes32[]"
+			}
+		],
+		"name": "registerEnvelopeSignature",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "cidId",
+				"type": "bytes32"
+			}
+		],
+		"name": "rosterSignedCount",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "server",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "orgIdCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address[]",
+				"name": "wallets_",
+				"type": "address[]"
+			}
+		],
+		"name": "setOrgControllers",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "paymentValidator_",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "attachmentRelease_",
+				"type": "address"
+			}
+		],
+		"name": "setSatelliteContracts",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newServer_",
+				"type": "address"
+			}
+		],
+		"name": "setServer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "sender_",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "viewerWallet_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "viewerEmailCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "authSubjectCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			}
+		],
+		"name": "validateEnvelopeAckSignature",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "pieceCid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "requiredCommitments",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "optionalCommitments",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "viewerEmailCommitments",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "senderEmailCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "senderAuthSubjectCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "orgIdCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint8",
+						"name": "routingMode",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "routingOrder",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "uint8",
+						"name": "quorumN",
+						"type": "uint8"
+					},
+					{
+						"internalType": "bytes32[]",
+						"name": "quorumSet",
+						"type": "bytes32[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "signature",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "placementCommitment",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "documentSha256",
+						"type": "bytes32"
+					}
+				],
+				"internalType": "struct FSEnvelopeRegistry.RegisterEnvelopeInput",
+				"name": "input",
+				"type": "tuple"
+			}
+		],
+		"name": "validateEnvelopeRegistrationSignature",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "pieceCid_",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "sender_",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "signerWallet_",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "signerEmailCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "authSubjectCommitment_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes20",
+				"name": "dl3SignatureCommitment_",
+				"type": "bytes20"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp_",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature_",
+				"type": "bytes"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "completionsRoot_",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint8",
+				"name": "leafSchemaVersion_",
+				"type": "uint8"
+			}
+		],
+		"name": "validateEnvelopeSigningSignature",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
