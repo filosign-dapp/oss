@@ -30,12 +30,25 @@ From **filosign root**, `@filosign/protocol` is linked for `apps/client` (comple
 
 ## Publish to public OSS repo
 
-Push only this folder to a separate GitHub remote (no duplicate dev checkout):
+Public remote: `git@github.com:filosign-dapp/oss.git` (repo root = this tree, not a nested `oss/` folder).
+
+One-time setup from **filosign repo root**:
 
 ```bash
-# From filosign repo root
+git remote add oss git@github.com:filosign-dapp/oss.git
+```
+
+After committing changes under `oss/` in filosign, publish:
+
+```bash
 git subtree split --prefix=oss -b oss-publish
-git push git@github.com:filosign-dapp/oss.git oss-publish:main
+git push oss oss-publish:main --force-with-lease
+```
+
+If public `main` still has the old standalone history and rejects the push, replace it:
+
+```bash
+git push oss oss-publish:main --force
 ```
 
 To pull external OSS contributions back:
